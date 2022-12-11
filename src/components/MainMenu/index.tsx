@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {
   DesktopOutlined,
   FileOutlined,
@@ -26,10 +26,10 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-  getItem('Option 1', '/', <PieChartOutlined />),
+  getItem('Option 1', '/home', <PieChartOutlined />),
   getItem('Option 2', '/page', <DesktopOutlined />),
   getItem('User', 'sub1', <UserOutlined />, [
-    getItem('Tom', '3'),
+    getItem('Tom', '/sub1/other'),
     getItem('Bill', '4'),
     getItem('Alex', '5'),
   ]),
@@ -38,9 +38,25 @@ const items: MenuItem[] = [
 ];
 
 const MainMenu: React.FC = () => {
-  const [openKeys, setOpenKeys] = useState<string[]>([])
-  const navigateto = useNavigate()
 
+  const navigateto = useNavigate()
+  const currentRoute = useLocation()
+
+  // 当前多级菜单默认展开
+  // let currentKey:string = ''
+  // const findCurrentKey = (item: MenuItem) => {
+  //   return item.key = currentRoute.pathname
+  // }
+  // const getSubOpenKey = (items: MenuItem) => {
+  //   for (const item of items) {
+  //     if (item.children && item.children.length > 0 && item.find(findCurrentKey)) {
+  //       currentKey = item.key
+  //       break
+  //     }
+  //   }
+  // }
+  // getSubOpenKey(items)
+  const [openKeys, setOpenKeys] = useState<string[]>([])
   const handleMenuClick: MenuProps['onClick'] = (e) => {
     navigateto(e.key)
   }
@@ -49,10 +65,11 @@ const MainMenu: React.FC = () => {
   const handleOpenChange = (keys: string[]) => {
     setOpenKeys([keys[keys.length - 1]])
   }
+
   return (
     <Menu
       theme="dark"
-      defaultSelectedKeys={['/']}
+      defaultSelectedKeys={[currentRoute.pathname]}
       mode="inline"
       items={items}
       onClick={handleMenuClick}

@@ -1,8 +1,9 @@
 import { lazy, Suspense } from 'react'
 import BaseLayout from '@/layout'
-const About = lazy(() => import('@/views/about')) 
+const About = lazy(() => import('@/views/about'))
 const Home = lazy(() => import('@/views/home'))
 const PageOne = lazy(() => import('@/views/pageone'))
+const Other = lazy(() => import('@/views/other'))
 import { Navigate } from 'react-router-dom'
 import { RouteObject } from './types'
 
@@ -31,9 +32,17 @@ const routes: RouteObject[] = [
       {
         path: '/page',
         element: withLoadingComponent(<PageOne />)
+      },
+      {
+        path:'/sub1/other', 
+        element: withLoadingComponent(<Other />)
       }
+      // {
+      //   path: '*',
+      //   element: <Navigate to='/home' />,
+      // },
     ]
-  }
+  },
 ]
 
 export default routes
