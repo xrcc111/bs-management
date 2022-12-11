@@ -1,12 +1,15 @@
-import Home from '@/views/home'
 import { lazy, Suspense } from 'react'
-const About = lazy(() => import('@/views/about')) // 懒加载模式下可能需要 Suspense
+import BaseLayout from '@/layout'
+const About = lazy(() => import('@/views/about')) 
+const Home = lazy(() => import('@/views/home'))
+const PageOne = lazy(() => import('@/views/pageone'))
 import { Navigate } from 'react-router-dom'
 import { RouteObject } from './types'
 
-const withLoadingComponent = (com: JSX.Element) => (
+// 懒加载模式下可能需要 Suspense
+const withLoadingComponent = (component: JSX.Element) => (
   <Suspense fallback={<div>loading...</div>}>
-    {com}
+    {component}
   </Suspense>
 )
 
@@ -14,15 +17,22 @@ const withLoadingComponent = (com: JSX.Element) => (
 const routes: RouteObject[] = [
   {
     path: '/',
-    element: <Navigate to="/home" />,
+    element: <Navigate to='/home' />,
   },
   {
-    path: '/home',
-    element: <Home />,
-  },
-  {
-    path: '/about',
-    element: withLoadingComponent(<About/>)
+    path: '/',
+    element: <BaseLayout />,
+    children: [
+      {
+        path: '/home',
+        index: true,
+        element: withLoadingComponent(<Home />)
+      },
+      {
+        path: '/page',
+        element: withLoadingComponent(<PageOne />)
+      }
+    ]
   }
 ]
 

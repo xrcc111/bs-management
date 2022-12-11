@@ -10,10 +10,6 @@ function App() {
   const outlet = useRoutes(router)
   return (
     <div className="App">
-      Hello React
-      <Header></Header>
-      <Button type="primary">Primary Button</Button>
-      <StepBackwardOutlined />
       {outlet}
     </div>
   )
