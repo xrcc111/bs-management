@@ -47,9 +47,10 @@ const MainMenu: React.FC = () => {
   // const findCurrentKey = (item: MenuItem) => {
   //   return item.key = currentRoute.pathname
   // }
-  // const getSubOpenKey = (items: MenuItem) => {
+  // const getSubOpenKey = (items: MenuProps) => {
   //   for (const item of items) {
-  //     if (item.children && item.children.length > 0 && item.find(findCurrentKey)) {
+  //     console.log(item);
+  //     if (item.children && item.children.length > 0 && item.children.find(findCurrentKey)) {
   //       currentKey = item.key
   //       break
   //     }

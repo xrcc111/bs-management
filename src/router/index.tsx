@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react'
 import BaseLayout from '@/layout'
+import Login from '@/views/login'
 const About = lazy(() => import('@/views/about'))
 const Home = lazy(() => import('@/views/home'))
 const PageOne = lazy(() => import('@/views/pageone'))
@@ -34,7 +35,7 @@ const routes: RouteObject[] = [
         element: withLoadingComponent(<PageOne />)
       },
       {
-        path:'/sub1/other', 
+        path: '/sub1/other',
         element: withLoadingComponent(<Other />)
       }
       // {
@@ -43,6 +44,10 @@ const routes: RouteObject[] = [
       // },
     ]
   },
+  {
+    path: '/login',
+    element: <Login />,
+  }
 ]
 
 export default routes
