@@ -1,7 +1,7 @@
-import Request from './module/index'
+import Request from './request/index'
 import { AxiosResponse } from 'axios'
 
-import type { RequestConfig } from './module/type'
+import type { RequestConfig } from './request/type'
 
 export interface Response<T> {
   statusCode: number
@@ -15,7 +15,7 @@ interface FinallRequestConfig<T, R> extends RequestConfig<Response<R>> {
 }
 
 const request = new Request({
-  baseURL: import.meta.env.BASE_URL,
+  baseURL: import.meta.env.BASE_URL || 'https://xrblogs.cn/api/',
   timeout: 1000 * 60 * 5,
   interceptors: {
     // 请求拦截器

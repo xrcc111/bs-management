@@ -1,10 +1,16 @@
 import React from 'react'
 import { Button, Checkbox, Form, Input } from 'antd'
+import { AppDispatch, RooState } from '@/store'
+import { useSelector, useDispatch } from 'react-redux'
+import { userLoginIn } from '@/store/reducer/user'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import styles from './login.module.scss'
+
 const Login: React.FC = () => {
+  const user = useSelector((state: RooState) => state.user)
+  const dispatch: AppDispatch = useDispatch()
   const onFinish = (values: any) => {
-    console.log('Success:', values);
+    dispatch(userLoginIn(values))
   };
 
   const onFinishFailed = (errorInfo: any) => {
