@@ -7,10 +7,11 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import styles from './login.module.scss'
 
 const Login: React.FC = () => {
-  const user = useSelector((state: RooState) => state.user)
+  const token = useSelector((state: RooState) => state.user.token)
   const dispatch: AppDispatch = useDispatch()
   const onFinish = (values: any) => {
     dispatch(userLoginIn(values))
+    console.log(token)
   };
 
   const onFinishFailed = (errorInfo: any) => {

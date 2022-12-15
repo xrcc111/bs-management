@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit"
 
 export interface CounterState {
   count: number
@@ -18,8 +18,8 @@ export const counterSlice = createSlice({
   },
   // 额外的reducer
   extraReducers(bulider) {
-    bulider.addCase(incrementAsync.fulfilled, (state, { payload }) => {
-      state.count = payload
+    bulider.addCase(incrementAsync.fulfilled, (state, action: PayloadAction<number>) => {
+      state.count += action.payload
     })
   }
 })

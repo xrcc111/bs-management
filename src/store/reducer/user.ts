@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { loginIn, User } from "@/api/login"
 
 export interface userState {
@@ -18,13 +18,17 @@ const initialState: userState = {
 export const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    // getUserToken: (state: userState, actions: PayloadAction<userState>) => {
+    //   state.token = actions.payload.token
+    // }
+  },
   extraReducers(bulider) {
-    bulider.addCase(userLoginIn.fulfilled, (state: userState, { payload }) => {
-      state.code = payload.code
-      state.expireAt = payload.expireAt
-      state.message = payload.message
-      state.token = payload.token
+    bulider.addCase(userLoginIn.fulfilled, (state: userState, action: PayloadAction<userState>) => {
+      state.code = action.payload.code
+      state.expireAt = action.payload.expireAt
+      state.message = action.payload.message
+      state.token = action.payload.token
     })
   }
 })
@@ -34,6 +38,7 @@ export const userLoginIn = createAsyncThunk('userLoginIn', async (data: User) =>
   return res
 })
 
+// export const { getUserToken } = userSlice.actions
 export default userSlice.reducer
 
 
