@@ -4,18 +4,17 @@ import { AxiosResponse } from 'axios'
 import type { RequestConfig } from './request/type'
 
 export interface Response<T> {
-  statusCode: number
-  desc: string
-  result: T
+  code?: number,
+  data: T,
 }
 
 // 重写返回类型
 interface FinallRequestConfig<T, R> extends RequestConfig<Response<R>> {
   data?: T
 }
-
+console.log(import.meta.env);
 const request = new Request({
-  baseURL: import.meta.env.BASE_URL || 'https://xrblogs.cn/api/',
+  baseURL: '/admin',
   timeout: 1000 * 60 * 5,
   interceptors: {
     // 请求拦截器

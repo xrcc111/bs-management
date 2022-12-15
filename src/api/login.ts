@@ -5,8 +5,15 @@ export interface User {
   password: string
 }
 
+export interface userState {
+  code: number,
+  expireAt: string,
+  message: string,
+  token: string,
+}
+
 export const loginIn = (data: User) =>
-  finallRequest({
+  finallRequest<User, userState>({
     url: 'users/login',
     method: 'post',
     data
