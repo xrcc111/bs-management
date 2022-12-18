@@ -13,8 +13,8 @@ export const counterSlice = createSlice({
   name: 'counter',
   initialState,
   reducers: {
-    increment: (state: CounterState) => { state.count += 1 },
-    decrement: (state: CounterState) => { state.count -= 1 }
+    increment: (state: CounterState):void => { state.count += 1 },
+    decrement: (state: CounterState):void => { state.count -= 1 }
   },
   // 额外的reducer
   extraReducers(bulider) {

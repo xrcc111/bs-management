@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { decrement, increment, incrementAsync } from '@/store/reducer/counter'
 
 const Home: React.FC = () => {
-  const count = useSelector((state: RooState) => state.counter.count)
+  const count = useSelector((state: RooState) => state.counter.count);
   const dispatch: AppDispatch = useDispatch()
 
   return (

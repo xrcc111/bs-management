@@ -18,11 +18,7 @@ const initialState: userState = {
 export const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {
-    // getUserToken: (state: userState, actions: PayloadAction<userState>) => {
-    //   state.token = actions.payload.token
-    // }
-  },
+  reducers: {},
   extraReducers(bulider) {
     bulider.addCase(userLoginIn.fulfilled, (state: userState, action: PayloadAction<userState>) => {
       state.code = action.payload.code
@@ -38,7 +34,6 @@ export const userLoginIn = createAsyncThunk('userLoginIn', async (data: User) =>
   return res
 })
 
-// export const { getUserToken } = userSlice.actions
 export default userSlice.reducer
 
 

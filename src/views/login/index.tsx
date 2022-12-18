@@ -1,22 +1,25 @@
 import React from 'react'
-import { Button, Checkbox, Form, Input } from 'antd'
+import { Button, Form, Input } from 'antd'
 import { AppDispatch, RooState } from '@/store'
 import { useSelector, useDispatch } from 'react-redux'
 import { userLoginIn } from '@/store/reducer/user'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
+import { User } from '@/api/login'
 import styles from './login.module.scss'
 
 const Login: React.FC = () => {
   const token = useSelector((state: RooState) => state.user.token)
   const dispatch: AppDispatch = useDispatch()
-  const onFinish = (values: any) => {
+  const onFinish = (values: User) => {
     dispatch(userLoginIn(values))
-    console.log(token)
+    console.log(token); // undefined
   };
 
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };
+
+
   return (
     <div className={styles.loginPage}>
       <div className={styles.title}>通用管理系统</div>
@@ -37,10 +40,6 @@ const Login: React.FC = () => {
           name="password"
         >
           <Input.Password placeholder='请输入密码' prefix={<LockOutlined />} />
-        </Form.Item>
-
-        <Form.Item name="remember" valuePropName="checked">
-          <Checkbox style={{ fontSize: '12px' }}>记住密码</Checkbox>
         </Form.Item>
 
         <Form.Item>
