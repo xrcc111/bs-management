@@ -8,11 +8,14 @@ import { User } from '@/api/login'
 import styles from './login.module.scss'
 
 const Login: React.FC = () => {
-  const token = useSelector((state: RooState) => state.user.token)
+  const { token } = useSelector((state: RooState) => state.user)
+  console.log(token);
+  if(token) {
+    localStorage.setItem('token',token)
+  }
   const dispatch: AppDispatch = useDispatch()
   const onFinish = (values: User) => {
     dispatch(userLoginIn(values))
-    console.log(token); // undefined
   };
 
   const onFinishFailed = (errorInfo: any) => {
