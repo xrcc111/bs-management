@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Button, Form, Input, message } from 'antd'
 import { AppDispatch, RooState } from '@/store'
 import { useSelector, useDispatch } from 'react-redux'
-import { userLoginIn } from '@/store/reducer/user'
+import { userLoginIn, setToken } from '@/store/reducer/user'
 import { useNavigate } from 'react-router-dom'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { User } from '@/api/login'
@@ -12,14 +12,17 @@ const Login: React.FC = () => {
   const { token } = useSelector((state: RooState) => state.user)
   const navigate = useNavigate()
   const [messageApi, contextHolder] = message.useMessage();
-  if (token) {
-    localStorage.setItem('token', token)
-    messageApi.open({
-      type: 'success',
-      content: '登录成功',
-    })
-    //navigate('/home')
-  }
+
+  useEffect(() => {
+    if (token) {
+      dispatch(setToken())
+      messageApi.open({
+        type: 'success',
+        content: '登录成功',
+      })
+      navigate('/home')
+    }
+  }, [token])
   const dispatch: AppDispatch = useDispatch()
   const onFinish = (values: User) => {
     dispatch(userLoginIn(values))
