@@ -1,17 +1,24 @@
 import React from 'react'
-import { Button, Form, Input } from 'antd'
+import { Button, Form, Input, message } from 'antd'
 import { AppDispatch, RooState } from '@/store'
 import { useSelector, useDispatch } from 'react-redux'
 import { userLoginIn } from '@/store/reducer/user'
+import { useNavigate } from 'react-router-dom'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { User } from '@/api/login'
 import styles from './login.module.scss'
 
 const Login: React.FC = () => {
   const { token } = useSelector((state: RooState) => state.user)
-  console.log(token);
-  if(token) {
-    localStorage.setItem('token',token)
+  const navigate = useNavigate()
+  const [messageApi, contextHolder] = message.useMessage();
+  if (token) {
+    localStorage.setItem('token', token)
+    messageApi.open({
+      type: 'success',
+      content: '登录成功',
+    })
+    //navigate('/home')
   }
   const dispatch: AppDispatch = useDispatch()
   const onFinish = (values: User) => {
@@ -25,7 +32,8 @@ const Login: React.FC = () => {
 
   return (
     <div className={styles.loginPage}>
-      <div className={styles.title}>通用管理系统</div>
+      {contextHolder}
+      <div className={styles.title}>管理系统</div>
       <Form
         name="basic"
         initialValues={{ remember: true }}
