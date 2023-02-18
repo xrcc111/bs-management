@@ -1,12 +1,12 @@
-import { configureStore } from "@reduxjs/toolkit";
-import counter from "./reducer/counter";
-import user from "./reducer/user";
+import { configureStore } from '@reduxjs/toolkit'
+import counter from './reducer/counter'
+import user from './reducer/user'
 
 const store = configureStore({
-  reducer:{
+  reducer: {
     counter: counter,
     user: user,
-  }
+  },
 })
 
 export type RooState = ReturnType<typeof store.getState>

@@ -9,8 +9,8 @@ export default defineConfig(({ mode }: ConfigEnv) => {
     plugins: [react()],
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, './src')
-      }
+        '@': path.resolve(__dirname, './src'),
+      },
     },
     server: {
       proxy: {
@@ -18,16 +18,9 @@ export default defineConfig(({ mode }: ConfigEnv) => {
         '/admin': {
           target: env.VITE_APP_API_BASE_URL,
           changeOrigin: true,
-          rewrite: path => path.replace(/^\/admin/, ''),
+          rewrite: (path) => path.replace(/^\/admin/, ''),
         },
       },
     },
   }
 })
-
-
-
-/**
- * 
- * 
- */
